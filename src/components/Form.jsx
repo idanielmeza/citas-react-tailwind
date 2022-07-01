@@ -8,8 +8,7 @@ const Form = ({setPacientes, paciente, setPaciente}) => {
         propietario: '',
         alta: '',
         email: '',
-        sintomas: '',
-        id: crypto.randomUUID()
+        sintomas: ''
     });
 
     const [editar, setEditar] = useState(false);
@@ -37,8 +36,11 @@ const Form = ({setPacientes, paciente, setPaciente}) => {
             return;
         }
 
+        const paci = form;
+        paci.id = crypto.randomUUID();
+
         if(!editar) {
-            setPacientes(prevPacientes => [form, ...prevPacientes,]);
+            setPacientes(prevPacientes => [paci, ...prevPacientes,]);
         }else{
             setPacientes(prevPacientes => prevPacientes.map(pac => pac.id === form.id ? form : pac));
         }

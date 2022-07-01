@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-const Paciente = ({paciente, setPaciente}) => {
+const Paciente = ({paciente, setPaciente, setPacientes}) => {
 
     const {mascota,propietario,email,alta,sintomas} = paciente;
 
@@ -13,6 +13,11 @@ const Paciente = ({paciente, setPaciente}) => {
         const anio = fecha.year();
         return `${dia}, ${fecha.date()} de ${mes} de ${anio}`;
 
+    }
+
+    const eliminarPaciente = () => {
+        setPacientes(prevPacientes => prevPacientes.filter(pac => pac.id !== paciente.id));
+        setPaciente(null);
     }
 
     return ( 
@@ -45,7 +50,9 @@ const Paciente = ({paciente, setPaciente}) => {
                     className='bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-md transition-colors'>
                         Editar
                     </button>
-                    <button className='bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-md mx-2 transition-colors'>
+                    <button
+                        onClick={eliminarPaciente}
+                    className='bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-md mx-2 transition-colors'>
                         Eliminar
                     </button>
                 </div>
